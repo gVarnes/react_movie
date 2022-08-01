@@ -51,10 +51,6 @@ const Carousel = () => {
       .then((res) => setMovies(res.results));
   }, []);
 
-  // useEffect(() => {
-  //   movies.forEach((item) => console.log(item));
-  // }, [movies]);
-
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -94,7 +90,6 @@ const Carousel = () => {
           index={activeStep}
           onChangeIndex={handleStepChange}
           enableMouseEvents
-          // style={{ maxHeight: '385px', overflow: 'hidden' }}
         >
           {movies.map((step, index) => {
             return (
@@ -105,12 +100,9 @@ const Carousel = () => {
                     sx={{
                       height: '385px',
                       display: 'block',
-                      // maxWidth: 400,
                       overflow: 'hidden',
                       objectFit: 'cover',
                       width: '100%',
-                      // height: '100%',
-                      // background: `center no-repeat url(${step.imgPath})`,
                     }}
                     src={
                       'https://image.tmdb.org/t/p/w1280' + step.backdrop_path

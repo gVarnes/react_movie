@@ -9,7 +9,7 @@ import {
   Container,
 } from '@mui/material';
 
-import AppButton from './../AppButton';
+import AppButton from './AppButton';
 import { useTheme } from '@mui/material/styles';
 
 const Header = () => {
