@@ -6,6 +6,8 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: resolve(__dirname, 'build'),
+    // publicPath: 'https://localhost:3000/',
+    publicPath: '/',
     filename: '[name]-[fullhash].js',
     clean: true,
   },
