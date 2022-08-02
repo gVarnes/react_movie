@@ -21,15 +21,8 @@ const MainContent = () => {
       });
   }, []);
 
-  // useEffect(() => {
-  //   movies.forEach((item) => console.log(item));
-  // }, [movies]);
-
   return (
     <Container>
-      {/* <Routes>
-        <Route path="/" element={}></Route>
-      </Routes> */}
       <Grid container spacing={2}>
         {movies.map((movie) => (
           <GridItem {...movie} key={movie.id}></GridItem>

@@ -19,3 +19,7 @@
           }
 
 //https://image.tmdb.org/t/p/w1280
+
+Request URL: http://localhost:3000/main-90dd40f522a03d2b8d81.css
+
+Request URL: http://127.0.0.1:5500/main-ef77a7d3ada0ed5cc67e.css doesnt work for build folder in production

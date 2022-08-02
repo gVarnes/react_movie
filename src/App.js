@@ -29,12 +29,12 @@ const App = () => {
         }}
       >
         <Carousel></Carousel>
-        {/* <Routes>
+        <Routes>
           <Route path="/" element={<MainContent />}></Route>
           <Route path="/film/:id" element={<FilmPage />}></Route>
-        </Routes> */}
+        </Routes>
         {/* <MainContent></MainContent> */}
-        <FilmPage></FilmPage>
+        {/* <FilmPage></FilmPage> */}
       </Paper>
     </Box>
   );
