@@ -2,7 +2,6 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
-import './index.scss';
 import App from './App';
 
 import { store } from './redux/store';
@@ -27,6 +26,12 @@ const theme = createTheme({
       main: 'rgba(15,239,253,1)',
       light: 'rgba(255,0,245,1)',
       dark: 'rgba(0,0,0,1)',
+    },
+  },
+  typography: {
+    h2: {
+      fontWeight: 700,
+      fontSize: '5rem',
     },
   },
 });

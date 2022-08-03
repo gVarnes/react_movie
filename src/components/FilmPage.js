@@ -18,6 +18,8 @@ import {
 import { useTheme } from '@mui/material/styles';
 import { styled } from '@mui/system';
 
+import './filmpage.scss';
+
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 
@@ -74,7 +76,6 @@ const FilmPage = () => {
   };
 
   useEffect(() => {
-    console.log(id);
     fetch(
       `https://api.themoviedb.org/3/movie/${id}?api_key=3796f44e00425ed7f9ce24e5c32086ef&language=en-US`
     )
@@ -88,137 +89,142 @@ const FilmPage = () => {
     )
       .then((data) => data.json())
       .then((res) => setCast(res.cast));
-  }, []);
-
-  useEffect(() => {
-    console.log(film);
-    console.log(cast);
-  }, [film]);
+  }, [id]);
 
   return (
-    <Container>
-      <StyledCard>
-        <StyledCardMedia>
-          <CardMedia
-            component="img"
-            alt={film.title}
-            image={'https://image.tmdb.org/t/p/w1280' + film.poster_path}
-            sx={{ width: '100%' }}
-          />
-        </StyledCardMedia>
-        <StyledCardContent>
-          <Typography sx={{ fontSize: '2.5rem' }}>{film.title}</Typography>
-          <Typography sx={{ fontSize: '0.8rem' }}>{film.tagline}</Typography>
-          {!isLoading && (
-            <List sx={{ display: 'flex' }}>
-              {film.genres &&
-                film.genres.map((item, index) => (
-                  <ListItem key={index}>{item.name}</ListItem>
-                ))}
-            </List>
-          )}
-          <Box sx={{ position: 'relative', display: 'inline-flex' }}>
-            <CircularProgress
-              variant="determinate"
-              value={film.vote_average * 10}
-              color="success"
-            />
-            <Box
-              sx={{
-                top: 0,
-                left: 0,
-                bottom: 0,
-                right: 0,
-                position: 'absolute',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <Typography
-                variant="caption"
-                component="div"
-                color="primary.contrastText"
-              >
-                {`${Math.round(film.vote_average * 10)}%`}
-              </Typography>
-            </Box>
-          </Box>
-          <Typography>{film.overview}</Typography>
-        </StyledCardContent>
-      </StyledCard>
-      <Box>
-        <AutoPlaySwipeableViews
-          axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-          index={activeStep}
-          //  onChangeIndex={handleStepChange}
-          containerStyle={{ width: '200px', gap: '10px' }}
-        >
-          {cast.map((actor, index) => {
-            return (
-              <Box aria-hidden={'false'} key={actor.name}>
-                {/* {Math.abs(activeStep - index) <= 2 ? ( */}
-                <Box
-                  component="img"
-                  sx={{
-                    display: 'block',
-                    overflow: 'hidden',
-                    objectFit: 'contain',
-                    width: '100%',
-                  }}
-                  src={'https://image.tmdb.org/t/p/w1280' + actor.profile_path}
-                  alt={actor.name}
-                />
-                {/* ) : null} */}
-              </Box>
-            );
-          })}
-        </AutoPlaySwipeableViews>
-        <MobileStepper
-          steps={maxSteps}
-          position="static"
-          activeStep={activeStep}
-          style={{
-            backgroundColor: theme.palette.primary.main,
-          }}
-          nextButton={
-            <Button
-              size="small"
-              onClick={handleNext}
-              disabled={activeStep === maxSteps - 1}
-              sx={{
-                color: theme.palette.primary.contrastText,
-              }}
-            >
-              Next
-              {theme.direction === 'rtl' ? (
-                <KeyboardArrowLeft />
-              ) : (
-                <KeyboardArrowRight />
-              )}
-            </Button>
-          }
-          backButton={
-            <Button
-              size="small"
-              onClick={handleBack}
-              disabled={activeStep === 0}
-              sx={{
-                color: theme.palette.primary.contrastText,
-              }}
-            >
-              {theme.direction === 'rtl' ? (
-                <KeyboardArrowRight />
-              ) : (
-                <KeyboardArrowLeft />
-              )}
-              Back
-            </Button>
-          }
-        />
-      </Box>
-    </Container>
+    <div
+      className="banner"
+      style={{
+        backgroundImage:
+          'url(https://image.tmdb.org/t/p/w1280' + film.backdrop_path,
+      }}
+    ></div>
   );
+
+  // return (
+  //   <Container>
+  //     <StyledCard>
+  //       <StyledCardMedia>
+  //         <CardMedia
+  //           component="img"
+  //           alt={film.title}
+  //           image={'https://image.tmdb.org/t/p/w1280' + film.poster_path}
+  //           sx={{ width: '100%' }}
+  //         />
+  //       </StyledCardMedia>
+  //       <StyledCardContent>
+  //         <Typography sx={{ fontSize: '2.5rem' }}>{film.title}</Typography>
+  //         <Typography sx={{ fontSize: '0.8rem' }}>{film.tagline}</Typography>
+  //         {!isLoading && (
+  //           <List sx={{ display: 'flex' }}>
+  //             {film.genres &&
+  //               film.genres.map((item, index) => (
+  //                 <ListItem key={index}>{item.name}</ListItem>
+  //               ))}
+  //           </List>
+  //         )}
+  //         <Box sx={{ position: 'relative', display: 'inline-flex' }}>
+  //           <CircularProgress
+  //             variant="determinate"
+  //             value={film.vote_average * 10}
+  //             color="success"
+  //           />
+  //           <Box
+  //             sx={{
+  //               top: 0,
+  //               left: 0,
+  //               bottom: 0,
+  //               right: 0,
+  //               position: 'absolute',
+  //               display: 'flex',
+  //               alignItems: 'center',
+  //               justifyContent: 'center',
+  //             }}
+  //           >
+  //             <Typography
+  //               variant="caption"
+  //               component="div"
+  //               color="primary.contrastText"
+  //             >
+  //               {`${Math.round(film.vote_average * 10)}%`}
+  //             </Typography>
+  //           </Box>
+  //         </Box>
+  //         <Typography>{film.overview}</Typography>
+  //       </StyledCardContent>
+  //     </StyledCard>
+  //     <Box>
+  //       <AutoPlaySwipeableViews
+  //         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+  //         index={activeStep}
+  //         //  onChangeIndex={handleStepChange}
+  //         containerStyle={{ width: '200px', gap: '10px' }}
+  //       >
+  //         {cast.map((actor, index) => {
+  //           return (
+  //             <Box aria-hidden={'false'} key={actor.name}>
+  //               {/* {Math.abs(activeStep - index) <= 2 ? ( */}
+  //               <Box
+  //                 component="img"
+  //                 sx={{
+  //                   display: 'block',
+  //                   overflow: 'hidden',
+  //                   objectFit: 'contain',
+  //                   width: '100%',
+  //                 }}
+  //                 src={'https://image.tmdb.org/t/p/w1280' + actor.profile_path}
+  //                 alt={actor.name}
+  //               />
+  //               {/* ) : null} */}
+  //             </Box>
+  //           );
+  //         })}
+  //       </AutoPlaySwipeableViews>
+  //       <MobileStepper
+  //         steps={maxSteps}
+  //         position="static"
+  //         activeStep={activeStep}
+  //         style={{
+  //           backgroundColor: theme.palette.primary.main,
+  //         }}
+  //         nextButton={
+  //           <Button
+  //             size="small"
+  //             onClick={handleNext}
+  //             disabled={activeStep === maxSteps - 1}
+  //             sx={{
+  //               color: theme.palette.primary.contrastText,
+  //             }}
+  //           >
+  //             Next
+  //             {theme.direction === 'rtl' ? (
+  //               <KeyboardArrowLeft />
+  //             ) : (
+  //               <KeyboardArrowRight />
+  //             )}
+  //           </Button>
+  //         }
+  //         backButton={
+  //           <Button
+  //             size="small"
+  //             onClick={handleBack}
+  //             disabled={activeStep === 0}
+  //             sx={{
+  //               color: theme.palette.primary.contrastText,
+  //             }}
+  //           >
+  //             {theme.direction === 'rtl' ? (
+  //               <KeyboardArrowRight />
+  //             ) : (
+  //               <KeyboardArrowLeft />
+  //             )}
+  //             Back
+  //           </Button>
+  //         }
+  //       />
+  //     </Box>
+  //   </Container>
+  // );
 };
 
 export default FilmPage;

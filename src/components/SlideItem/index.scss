@@ -1,0 +1,125 @@
+@use '../../scss/' as *;
+
+.slider-item{
+	//   height: 100%;
+	padding: 9rem 0;
+	width: 100%;
+	position: relative;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+
+	&::before{
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		// background-color: $light-color;
+		@include overlay();
+		}
+
+		&::after{
+			content: "";
+			position: absolute;
+			bottom: 0px;
+			left: 0;
+			width: 100%;
+			height: 100px;
+			background-image: linear-gradient(to top, $bg-body,rgba(0,0,0,.0));
+		}
+
+
+	&.active &__content .content-item__poster{
+		img{
+			transform: scale(1);
+		}
+	}
+
+	&.active &__content{
+		.content-item__buttons, .content-item__title, .content-item__overview{
+			opacity: 1;
+			transform: translateY(0px);
+
+		}
+
+		.content-item__title{
+			transition-delay: .3s,.3s;
+		}
+		.content-item__overview{
+			transition-delay: .6s,.6s;
+		}
+		.content-item__buttons{
+			transition-delay: .9s,.9s;
+		}
+	}
+}
+
+.content-item{
+	@include flex(center,center);
+	position: relative;
+
+	&__info{
+		width: 55%;
+		padding: 0 3rem;
+		position: relative;
+
+		@include tablet{
+			width: 100%;
+		};
+
+		& > * ~ * {
+			margin-top: 3rem;
+		}
+	}
+
+	&__title{
+		font-size: 5rem;
+		font-weight: 700;
+		line-height: 1;
+
+		@include tablet{
+			font-size: 4rem;
+		};
+	}
+
+	&__overview{
+		font-weight: 700;
+	}
+
+	&__buttons{
+		& * ~ *{
+			margin: 0px 0px 0px 1rem;
+		}
+	}
+
+	&__buttons, &__title, &__overview{
+		opacity: 0;
+		transform: translateY(-100px);
+		transition: transform 0.5s ease, opacity 0.5s ease;
+	}
+
+	&__poster{
+		flex: 1;
+		@include flex(center,flex-start);
+
+		img{
+			width: 300px;
+			border-radius: $border-radius;
+			box-shadow: rgba(100, 100, 100, 0.2) 0px 7px 29px 0px;
+			transform: scale(0);
+			transition: transform 0.7s ease;
+		}
+
+		@include tablet{
+			display: none;
+		};
+	}
+}
+
+.content-item .content-item__info{
+	img{
+		transform: scale(1);
+	}
+}

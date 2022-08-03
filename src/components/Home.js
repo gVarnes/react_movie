@@ -8,7 +8,7 @@ import GridItem from './GridItem';
 import { Routes, Route } from 'react-router-dom';
 import FilmPage from './FilmPage';
 
-const MainContent = () => {
+const Home = () => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -32,4 +32,4 @@ const MainContent = () => {
   );
 };
 
-export default MainContent;
+export default Home;
