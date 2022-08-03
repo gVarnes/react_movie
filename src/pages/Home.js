@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
 import { Grid } from '@mui/material';
-import { Container } from '@mui/system';
 
-import GridItem from './GridItem';
-
-import { Routes, Route } from 'react-router-dom';
-import FilmPage from './FilmPage';
+import GridItem from '../components/GridItem';
+import Carousel from '../components/Carousel';
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
@@ -22,13 +19,14 @@ const Home = () => {
   }, []);
 
   return (
-    <Container>
+    <>
+      <Carousel></Carousel>
       <Grid container spacing={2}>
         {movies.map((movie) => (
           <GridItem {...movie} key={movie.id}></GridItem>
         ))}
       </Grid>
-    </Container>
+    </>
   );
 };
 

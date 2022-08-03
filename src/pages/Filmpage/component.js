@@ -18,7 +18,7 @@ import {
 import { useTheme } from '@mui/material/styles';
 import { styled } from '@mui/system';
 
-import './filmpage.scss';
+import './index.scss';
 
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
