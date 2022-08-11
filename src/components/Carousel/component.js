@@ -9,7 +9,6 @@ import 'swiper/scss';
 
 const Carousel = () => {
   const [movies, setMovies] = useState([]);
-  const maxSteps = movies.length;
 
   SwiperCore.use([Autoplay]);
 

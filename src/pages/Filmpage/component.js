@@ -1,61 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-
-import { Container } from '@mui/system';
-import {
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Button,
-  Typography,
-  CircularProgress,
-  Box,
-  List,
-  ListItem,
-  MobileStepper,
-} from '@mui/material';
-import { useTheme } from '@mui/material/styles';
-import { styled } from '@mui/system';
+import CastList from '../../components/CastList';
+import VideosList from '../../components/VideosList/component';
 
 import './index.scss';
 
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-
-import SwipeableViews from 'react-swipeable-views';
-import { autoPlay } from 'react-swipeable-views-utils';
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
-
-const StyledCard = styled(Card)(
-  ({ theme }) => `
-  	// max-width: 500px;
-	width: 100%;
-	background: ${theme.palette.primary.dark};
-	color: ${theme.palette.primary.contrastText};
-	display: flex;
-	align-items: center;
-	padding: 20px;
-  `
-);
-
-const StyledCardMedia = styled(CardMedia)(
-  ({ theme }) => `
-		flex: 0 1 50%;
-		max-width: 300px;
-	`
-);
-
-const StyledCardContent = styled(CardContent)(
-  ({ theme }) => `
-		flex: 1 1 auto;
-		width: 100%;
-	`
-);
-
 const FilmPage = () => {
-  const theme = useTheme();
-  const [film, setFilm] = useState([]);
+  const [film, setFilm] = useState('');
   const [cast, setCast] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
@@ -92,13 +43,46 @@ const FilmPage = () => {
   }, [id]);
 
   return (
-    <div
-      className="banner"
-      style={{
-        backgroundImage:
-          'url(https://image.tmdb.org/t/p/w1280' + film.backdrop_path,
-      }}
-    ></div>
+    film && (
+      <>
+        <div
+          className="banner"
+          style={{
+            backgroundImage:
+              'url(https://image.tmdb.org/t/p/w1280' + film.backdrop_path,
+          }}
+        ></div>
+        <div className="movie-content container mb-3">
+          <div className="movie-content__poster">
+            <div
+              className="movie-content__poster-img"
+              style={{
+                backgroundImage:
+                  'url(https://image.tmdb.org/t/p/w1280' + film.poster_path,
+              }}
+            ></div>
+          </div>
+          <div className="movie-content__info">
+            <h1 className="movie-content__title">{film.title}</h1>
+            <div className="movie-content__genres">
+              {film.genres.map((genre, i) => (
+                <span className="movie-content__genres-item" key={i}>
+                  {genre.name}
+                </span>
+              ))}
+            </div>
+            <div className="movie-content__overview">{film.overview}</div>
+          </div>
+          <div className="movie-content__cast cast-content">
+            <h2 className="cast-content__title">Casts</h2>
+            <CastList></CastList>
+          </div>
+        </div>
+        <div className="container mb-3">
+          <VideosList></VideosList>
+        </div>
+      </>
+    )
   );
 
   // return (

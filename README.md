@@ -23,3 +23,10 @@
 Request URL: http://localhost:3000/main-90dd40f522a03d2b8d81.css
 
 Request URL: http://127.0.0.1:5500/main-ef77a7d3ada0ed5cc67e.css doesnt work for build folder in production
+
+Website optimization (bonus task). Minimize and optimize css, js, images, etc. To do this, you need to
+deploy your work on any hosting available to you and send any domain available to you to it.
+a. Check your work using Google Page Speed and make sure your work is in the green zone.
+b. Check your work using Google Chrome Performance Audit / Lighthouse and make sure your
+work is in the green zone for Performance, Best practices, SEO (mobile and desktop for 3G).
+c. Check your work using Webpagetest and make sure the scores are close to AAAAAA.

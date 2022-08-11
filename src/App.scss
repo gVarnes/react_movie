@@ -60,3 +60,13 @@ a{
 .section__header{
 	@include flex(center,space-between)
 }
+
+.wrapper{
+	min-height: 100%;
+	@include flex(normal,normal);
+	flex-direction: column;
+}
+
+.main{
+	flex: 1 1 auto;
+}

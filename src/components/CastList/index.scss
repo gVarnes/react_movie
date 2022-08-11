@@ -1,0 +1,27 @@
+@use './../../scss/' as *;
+
+.swiper-slide {
+	height: auto;
+}
+
+.cast-content__swiper{
+	width: 100%;
+}
+
+.cast-content__slide{
+	@include flex(center,center);
+	flex-direction: column;
+
+}
+
+.cast-content__name{
+	flex: 1 1 auto;
+	margin: 0px 0px 10px 0px;
+	font-size: 1.3rem;
+}
+
+.cast-content__image{
+	width: 100%;
+	border-radius: $border-radius;
+	img{object-fit: cover;}
+}

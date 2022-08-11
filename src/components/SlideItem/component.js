@@ -20,7 +20,7 @@ const MovieSlideItem = ({ movie, isActiveClass }) => {
           <div className="content-item__overview">{movie.overview}</div>
           <div className="content-item__buttons">
             <Link to={`/film/${movie.id}`}>
-              <Button>Watch</Button>
+              <Button>View details</Button>
             </Link>
             <Button outlineClass="outline">Watch</Button>
           </div>

@@ -3,13 +3,17 @@ import './App.scss';
 
 import Header from './components/Header';
 import Routing from './config/Routing';
+import Footer from './components/Footer';
 
 const App = () => {
   return (
-    <>
+    <div className="wrapper">
       <Header></Header>
-      <Routing></Routing>
-    </>
+      <main className="main">
+        <Routing></Routing>
+      </main>
+      <Footer></Footer>
+    </div>
   );
 };
 
