@@ -27,7 +27,7 @@ const Carousel = () => {
         grabCursor={true}
         spaceBetween={0}
         slidesPerView={1}
-        // autoplay={{ delay: 3000 }}
+        autoplay={{ delay: 3000 }}
       >
         {movies.map((movie, i) => (
           <SwiperSlide key={i}>

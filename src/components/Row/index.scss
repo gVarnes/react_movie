@@ -1,0 +1,155 @@
+@use './../../scss/' as *;
+
+.swiper__slide{
+	width: 100%;
+}
+
+.row{
+	@include flex(center,normal);
+	flex-wrap: wrap;
+	gap: 20px;
+	&__title{
+		font-size: 1.5rem;
+	}
+	&__controls{
+		// flex: 1 1 auto;
+	}
+}
+
+// .controls-row{
+
+// 	@include flex(center,flex-start);
+// 	&__time{}
+
+// 	&__checkbox{
+// 		font-size: 16px;
+// 		line-height: 20px;
+// 		padding: 0 0 0 70px;
+// 		position: relative;
+// 		cursor: pointer;
+// 		transition: all 0.3s ease 0s;
+
+// 		&::before{
+// 			content: '';
+// 			width: 50px;
+// 			height: 20px;
+// 			border-radius: 20px;
+// 			background-color: $btn-color-main;
+// 			position: absolute;
+// 			left: 0;
+// 			top: 0;
+// 			transition: all 0.3s ease 0s;
+// 		}
+
+// 		&::after{
+// 			content: '';
+// 			position: absolute;
+// 			width: 30px;
+// 			height: 30px;
+// 			left: 0;
+// 			top: -5px;
+// 			background-color: $btn-color-secondary;
+// 			border-radius: 50%;
+// 			transition: all 0.3s ease 0s;
+// 		}
+
+// 		&.active::before{}
+// 		&.active::after{
+// 			left: 25px;
+// 		}
+
+// 	}
+// 	&__input{
+// 		display: none;
+// 	}
+// }
+.controls-row{
+
+	@include flex(center,flex-start);
+	gap: 20px;
+	overflow: hidden;
+	border-radius: $border-radius;
+	&__time{
+		border: 1px solid white;
+		padding: 5px 10px;
+		height: 100%;
+
+	}
+
+}
+
+.switcher {
+	position: relative;
+	display: flex;
+	cursor: pointer;
+	border: 1px solid $btn-color-secondary;
+	border-radius: $border-radius;
+
+	&__checkbox{
+		display: none;
+	}
+	
+	&__checkbox.active + .switcher::before {
+		transform: translateX(25%)
+	}
+ 
+	// indicator
+	&::before {
+	  content: '';
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  bottom: 0;
+	  height: 100%;
+	  width: 200%;
+	  border-radius: inherit;
+	  background-color: $btn-color-secondary;
+	  transform: translateX(-75%);
+	  transition: transform .5s ease-in-out;
+	}
+ }
+
+ .switcher__trigger {
+	position: relative;
+	z-index: 1;
+	padding: 3px 20px;
+	font-size: 0.7rem;
+ }
+
+.item-row{
+	@include flex(normal,normal);
+	flex-direction: column;
+	position: relative;
+
+	&__rating{
+		position: absolute;
+		top: 0;
+		left: 0;
+		border: 1px solid $btn-color-main;
+		background-color: $bg-body;
+		width: 35px;
+		height: 35px;
+		border-radius: 50%;
+		color: $txt-color;
+		@include flex(center,center);
+		cursor: default;
+	}
+
+	&__title{
+		text-align: center;
+		cursor: pointer;
+	}
+
+	&__image{
+		width: 100%;
+		border-radius: $border-radius;
+		overflow: hidden;
+		margin: 0px 0px 1rem 0px;
+		cursor: pointer;
+
+		img{
+			width: 100%;
+			height: 100%;
+		}
+	}
+}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import CastList from '../../components/CastList';
-import VideosList from '../../components/VideosList/component';
+import TrailersList from '../../components/TrailersList';
 
 import './index.scss';
 
@@ -13,18 +13,6 @@ const FilmPage = () => {
 
   const [activeStep, setActiveStep] = useState(0);
   const maxSteps = cast.length;
-
-  const handleStepChange = (step) => {
-    setActiveStep(step);
-  };
-
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
 
   useEffect(() => {
     fetch(
@@ -78,9 +66,7 @@ const FilmPage = () => {
             <CastList></CastList>
           </div>
         </div>
-        <div className="container mb-3">
-          <VideosList></VideosList>
-        </div>
+        <TrailersList></TrailersList>
       </>
     )
   );

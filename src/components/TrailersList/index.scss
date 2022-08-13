@@ -1,7 +1,11 @@
 @use './../../scss/' as *;
 
-.video{
+.movie-trailers{
+
+	&__video{
 	margin-bottom: 3rem;
+
+	}
 
 	&__title{
 		font-size: 1.3rem;

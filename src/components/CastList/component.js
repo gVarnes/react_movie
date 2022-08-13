@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './index.scss';
 import { useParams } from 'react-router-dom';
 
-import SwiperCore, { Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import 'swiper/scss';
@@ -10,7 +9,6 @@ import 'swiper/scss';
 const CastList = () => {
   const [cast, setCast] = useState([]);
   const { id } = useParams();
-  SwiperCore.use([Autoplay]);
 
   useEffect(() => {
     fetch(
@@ -20,19 +18,13 @@ const CastList = () => {
       .then((res) => setCast(res.cast.slice(0, 20)));
   }, [id]);
 
-  useEffect(() => {
-    // console.log(cast);
-  }, [cast]);
-
   return (
     <div className="cast-content__swiper">
       <Swiper
-        modules={[Autoplay]}
         grabCursor={true}
         spaceBetween={10}
         slidesPerView={2}
         breakpoints={{ 600: { slidesPerView: 4 }, 900: { slidesPerView: 6 } }}
-        // autoplay={{ delay: 3000 }}
       >
         {cast.map((actor, i) => (
           <SwiperSlide key={i} className="cast-content__slide">

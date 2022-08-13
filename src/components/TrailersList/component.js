@@ -2,9 +2,8 @@ import React, { useEffect, useState, useRef } from 'react';
 import './index.scss';
 
 import { useParams } from 'react-router-dom';
-import { VolumeDownOutlined } from '@mui/icons-material';
 
-const VideosList = () => {
+const TrailersList = () => {
   const [videos, setVideos] = useState([]);
   const { id } = useParams();
 
@@ -21,10 +20,10 @@ const VideosList = () => {
   }, [videos]);
 
   return (
-    <>
-      {videos.length &&
+    <div className="movie-trailers container mb-3">
+      {videos &&
         videos.map((video, i) => <Video item={video} key={video.id}></Video>)}
-    </>
+    </div>
   );
 };
 
@@ -37,8 +36,8 @@ const Video = ({ item }) => {
   }, []);
 
   return (
-    <div className="video">
-      <div className="video__title">
+    <div className="movie-trailers__video">
+      <div className="movie-trailers__title">
         <h2>{item.name}</h2>
       </div>
       <iframe
@@ -51,4 +50,4 @@ const Video = ({ item }) => {
   );
 };
 
-export default VideosList;
+export default TrailersList;
