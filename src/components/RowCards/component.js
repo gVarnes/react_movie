@@ -44,7 +44,7 @@ const RowCards = ({ condition = 'movie', movieOrTv, time = 'day' }) => {
     >
       {cards &&
         cards.map((movie, i) => (
-          <SwiperSlide key={movie.id} className="row__item item-row">
+          <SwiperSlide key={movie.id} className="row__card">
             <Card {...movie}></Card>
           </SwiperSlide>
         ))}
@@ -52,24 +52,31 @@ const RowCards = ({ condition = 'movie', movieOrTv, time = 'day' }) => {
   );
 };
 
-const Card = ({ backdrop_path, id, title, vote_average, name }) => {
+export const Card = ({
+  backdrop_path,
+  id,
+  title,
+  vote_average,
+  name,
+  poster_path,
+}) => {
   return (
-    <>
-      <div className="item-row__rating">
-        {Math.round(vote_average * 10) / 10}
-      </div>
-      <div className="item-row__image">
+    <div className="card">
+      <div className="card__rating">{Math.round(vote_average * 10) / 10}</div>
+      <div className="card__image">
         <Link to={`/film/${id}`}>
           <img
-            src={`https://image.tmdb.org/t/p/w220_and_h330_face${backdrop_path}`}
+            src={`https://image.tmdb.org/t/p/w220_and_h330_face${
+              backdrop_path ? backdrop_path : poster_path
+            }`}
             alt=""
           />
         </Link>
       </div>
-      <div className="item-row__title">
+      <div className="card__title">
         <Link to={`/film/${id}`}>{title ? title : name}</Link>
       </div>
-    </>
+    </div>
   );
 };
 

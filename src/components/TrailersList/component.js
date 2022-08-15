@@ -15,10 +15,6 @@ const TrailersList = () => {
       .then((res) => setVideos(res.results.slice(0, 4)));
   }, []);
 
-  useEffect(() => {
-    console.log(videos);
-  }, [videos]);
-
   return (
     <div className="movie-trailers container mb-3">
       {videos &&
@@ -28,7 +24,6 @@ const TrailersList = () => {
 };
 
 const Video = ({ item }) => {
-  console.log(item);
   const iframeRef = useRef(null);
   useEffect(() => {
     const height = (iframeRef.current.offsetWidth * 9) / 16 + 'px';

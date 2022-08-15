@@ -2,16 +2,16 @@ import React from 'react';
 
 import { Routes, Route } from 'react-router-dom';
 
-// import 'swiper/swiper.min.css';
-
 import Home from '../pages/Home';
-import FilmPage from '../pages/Filmpage';
+import MoviePage from '../pages/MoviePage';
+import MovieGrid from '../components/MovieGrid';
 
 const Routing = () => {
   return (
     <Routes>
       <Route path="/" exact element={<Home />}></Route>
-      <Route path="/film/:id" element={<FilmPage />}></Route>
+      <Route path="/film/:id" element={<MoviePage />}></Route>
+      <Route path="/catalog/:category" element={<MovieGrid />}></Route>
     </Routes>
   );
 };

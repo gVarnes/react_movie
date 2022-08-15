@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './index.scss';
+import undefined_image from './undefined_image.png';
+
 import { useParams } from 'react-router-dom';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -31,7 +33,11 @@ const CastList = () => {
             <h5 className="cast-content__name">{actor.name}</h5>
             <img
               className="cast-content__image"
-              src={'https://image.tmdb.org/t/p/w1280' + actor.profile_path}
+              src={
+                actor.profile_path
+                  ? 'https://image.tmdb.org/t/p/w1280' + actor.profile_path
+                  : undefined_image
+              }
               alt=""
             />
           </SwiperSlide>
