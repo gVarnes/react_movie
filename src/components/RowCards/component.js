@@ -36,7 +36,7 @@ const RowCards = ({ condition = 'movie', movieOrTv, time = 'day' }) => {
       spaceBetween={10}
       slidesPerView={1}
       breakpoints={{
-        0: { slidesPerView: 3 },
+        0: { slidesPerView: 2 },
         600: { slidesPerView: 4 },
         900: { slidesPerView: 5.5 },
         1024: { slidesPerView: 7.5 },
