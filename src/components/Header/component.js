@@ -2,9 +2,6 @@ import React, { useRef } from 'react';
 import './index.scss';
 import { Link } from 'react-router-dom';
 
-import AppButton from '../AppButton';
-import Button from '../Button/component';
-
 const Header = () => {
   const headerRef = useRef(null);
   const shrinkHeader = () => {
