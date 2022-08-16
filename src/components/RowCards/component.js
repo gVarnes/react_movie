@@ -19,7 +19,6 @@ const RowCards = ({ condition = 'movie', movieOrTv, time = 'day' }) => {
           setCards(res.results);
         });
     } else {
-      console.log('trand');
       fetch(
         `https://api.themoviedb.org/3/trending/movie/${time}?api_key=3796f44e00425ed7f9ce24e5c32086ef`
       )
@@ -64,7 +63,7 @@ export const Card = ({
     <div className="card">
       <div className="card__rating">{Math.round(vote_average * 10) / 10}</div>
       <div className="card__image">
-        <Link to={`/film/${id}`}>
+        <Link to={`/movie/${id}`}>
           <img
             src={`https://image.tmdb.org/t/p/w220_and_h330_face${
               backdrop_path ? backdrop_path : poster_path
@@ -74,7 +73,7 @@ export const Card = ({
         </Link>
       </div>
       <div className="card__title">
-        <Link to={`/film/${id}`}>{title ? title : name}</Link>
+        <Link to={`/movie/${id}`}>{title ? title : name}</Link>
       </div>
     </div>
   );

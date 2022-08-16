@@ -18,7 +18,7 @@
 
 	&.shrink{
 		height:$header-shrink-height;
-		background-color: $bg-body;
+		background-color: $dark-color;
 	}
 
 	&__wrap{
@@ -71,6 +71,10 @@
 				transition: width .3s ease;
 				height: 2px;
 				background-color: $btn-color-secondary;
+			}
+
+			&.active{
+				color: $btn-color-secondary;
 			}
 	
 			&.active::after, &:hover::after{

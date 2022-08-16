@@ -19,10 +19,9 @@ const MovieSlideItem = ({ movie, isActiveClass }) => {
           <h2 className="content-item__title">{movie.title}</h2>
           <div className="content-item__overview">{movie.overview}</div>
           <div className="content-item__buttons">
-            <Link to={`/film/${movie.id}`}>
+            <Link to={`/movie/${movie.id}`}>
               <Button>View details</Button>
             </Link>
-            <Button outlineClass="outline">Watch</Button>
           </div>
         </div>
         <div className="content-item__poster">

@@ -10,7 +10,7 @@ const Routing = () => {
   return (
     <Routes>
       <Route path="/" exact element={<Home />}></Route>
-      <Route path="/film/:id" element={<MoviePage />}></Route>
+      <Route path="/movie/:id" element={<MoviePage />}></Route>
       <Route path="/catalog/:category" element={<MovieGrid />}></Route>
     </Routes>
   );
