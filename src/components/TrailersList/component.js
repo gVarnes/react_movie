@@ -2,23 +2,22 @@ import React, { useEffect, useState, useRef } from 'react';
 import './index.scss';
 
 import { useParams } from 'react-router-dom';
+import api, { category } from '../../api/api';
 
 const TrailersList = () => {
   const [videos, setVideos] = useState([]);
   const { id } = useParams();
 
   useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/movie/${id}/videos?api_key=3796f44e00425ed7f9ce24e5c32086ef&language=en-US`
-    )
-      .then((data) => data.json())
-      .then((res) => setVideos(res.results.slice(0, 4)));
+    api
+      .getVideos(category.movie, id)
+      .then((response) => setVideos(response.results.slice(0, 4)));
   }, []);
 
   return (
     <div className="movie-trailers container mb-3">
       {videos &&
-        videos.map((video, i) => <Video item={video} key={video.id}></Video>)}
+        videos.map((video) => <Video item={video} key={video.id}></Video>)}
     </div>
   );
 };

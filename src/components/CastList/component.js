@@ -7,17 +7,15 @@ import { useParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import 'swiper/scss';
+import api, { category } from '../../api/api';
+import apiConfig from '../../api/apiConfig';
 
 const CastList = () => {
   const [cast, setCast] = useState([]);
   const { id } = useParams();
 
   useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/movie/${id}/credits?api_key=3796f44e00425ed7f9ce24e5c32086ef&language=en-US`
-    )
-      .then((data) => data.json())
-      .then((res) => setCast(res.cast.slice(0, 20)));
+    api.credits(category.movie, id).then((response) => setCast(response.cast));
   }, [id]);
 
   return (
@@ -35,10 +33,10 @@ const CastList = () => {
               className="cast-content__image"
               src={
                 actor.profile_path
-                  ? 'https://image.tmdb.org/t/p/w1280' + actor.profile_path
+                  ? `${apiConfig.w500Image(actor.profile_path)}`
                   : undefined_image
               }
-              alt=""
+              alt={actor.name}
             />
           </SwiperSlide>
         ))}

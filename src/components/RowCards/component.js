@@ -1,31 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import './index.scss';
 
 import { Link } from 'react-router-dom';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/scss';
+import api, { category, sortType } from '../../api/api';
+import apiConfig from '../../api/apiConfig';
 
-const RowCards = ({ condition = 'movie', movieOrTv, time = 'day' }) => {
+const RowCards = ({ sortCondition, movieOrTv = 'movie', time = 'day' }) => {
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    if (condition === 'popular') {
-      fetch(
-        `https://api.themoviedb.org/3/${movieOrTv}/popular?api_key=3796f44e00425ed7f9ce24e5c32086ef`
-      )
-        .then((data) => data.json())
-        .then((res) => {
-          setCards(res.results);
-        });
+    if (sortCondition === 'popular') {
+      api
+        .getList(category[movieOrTv], sortType[sortCondition], { params: {} })
+        .then((response) => setCards(response.results));
     } else {
-      fetch(
-        `https://api.themoviedb.org/3/trending/movie/${time}?api_key=3796f44e00425ed7f9ce24e5c32086ef`
-      )
-        .then((data) => data.json())
-        .then((res) => {
-          setCards(res.results);
-        });
+      api
+        .getTrending(category.movie, time, { params: {} })
+        .then((response) => setCards(response.results));
     }
   }, [movieOrTv, time]);
 
@@ -38,7 +32,7 @@ const RowCards = ({ condition = 'movie', movieOrTv, time = 'day' }) => {
         0: { slidesPerView: 2 },
         600: { slidesPerView: 4 },
         900: { slidesPerView: 5.5 },
-        1024: { slidesPerView: 7.5 },
+        1024: { slidesPerView: 6.5 },
       }}
     >
       {cards &&
@@ -65,9 +59,9 @@ export const Card = ({
       <div className="card__image">
         <Link to={`/movie/${id}`}>
           <img
-            src={`https://image.tmdb.org/t/p/w220_and_h330_face${
+            src={apiConfig.w220Andh330Image(
               backdrop_path ? backdrop_path : poster_path
-            }`}
+            )}
             alt=""
           />
         </Link>
@@ -79,4 +73,4 @@ export const Card = ({
   );
 };
 
-export default RowCards;
+export default memo(RowCards);

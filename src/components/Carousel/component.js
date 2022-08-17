@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import './index.scss';
 
 import SwiperCore, { Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SlideItem from '../SlideItem/component';
-
-import './index.scss';
 import 'swiper/scss';
+
+import SlideItem from '../SlideItem';
+
+import api, { category, sortType } from '../../api/api';
 
 const Carousel = () => {
   const [movies, setMovies] = useState([]);
@@ -13,11 +15,10 @@ const Carousel = () => {
   SwiperCore.use([Autoplay]);
 
   useEffect(() => {
-    fetch(
-      'https://api.themoviedb.org/3/movie/popular?api_key=3796f44e00425ed7f9ce24e5c32086ef&page=1'
-    )
-      .then((data) => data.json())
-      .then((res) => setMovies(res.results.slice(0, 4)));
+    const params = { page: 1 };
+    api
+      .getList(category.movie, sortType.popular, { params })
+      .then((response) => setMovies(response.results.slice(0, 4)));
   }, []);
 
   return (

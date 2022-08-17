@@ -1,13 +1,13 @@
 import React from 'react';
 
 import { Link } from 'react-router-dom';
+import apiConfig from '../../api/apiConfig';
 
 import Button from '../Button';
 import './index.scss';
 
 const MovieSlideItem = ({ movie, isActiveClass }) => {
-  const background =
-    'https://image.tmdb.org/t/p/original' + movie.backdrop_path;
+  const background = apiConfig.originalImage(movie.backdrop_path);
 
   return (
     <div

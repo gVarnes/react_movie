@@ -41,7 +41,7 @@ const Row = () => {
             </div>
           </label>
         </div>
-        <RowCards condition="popular" movieOrTv={movieOrTv}></RowCards>
+        <RowCards sortCondition="popular" movieOrTv={movieOrTv}></RowCards>
       </section>
       <section className="row container">
         <h2 className="row__title">In trend</h2>
