@@ -20,17 +20,27 @@ button{
 		box-shadow: 0px 0px 7px 8px $btn-color-secondary;
 	}
 
-	&.outline{
-		border: 3px solid transparent;
-		background-color: transparent;
-		color: $txt-color;
-		box-shadow: unset;
-		transition: all 0.3s ease;
-		border-radius: 0;
-		border-image: linear-gradient(150deg, $dark-color 22%, $btn-color-main 60%, $btn-color-secondary 100%) 1;
+	// &.outline{
+	// 	border: 3px solid transparent;
+	// 	background-color: transparent;
+	// 	color: $txt-color;
+	// 	box-shadow: unset;
+	// 	transition: all 0.3s ease;
+	// 	border-radius: 0;
+	// 	border-image: linear-gradient(150deg, $dark-color 22%, $btn-color-main 60%, $btn-color-secondary 100%) 1;
 
-		&:hover{
-			border-image: linear-gradient(-45deg, $dark-color 22%, $btn-color-main 60%, $btn-color-secondary 100%) 1;
-		}
+	// 	&:hover{
+	// 		border-image: linear-gradient(-45deg, $dark-color 22%, $btn-color-main 60%, $btn-color-secondary 100%) 1;
+	// 	}
+	// }
+
+	&.small{
+		padding: 0.3rem 1.4rem;
+		font-weight: 400;
+		box-shadow: 0px 0px 7px 2px $btn-color-secondary;
+	}
+
+	&.small:hover { 
+		box-shadow: 0px 0px 7px 4px $btn-color-secondary;
 	}
 }

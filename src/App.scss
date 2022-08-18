@@ -33,6 +33,10 @@ a{
 	color:unset;
 }
 
+button,input{
+	outline: 0;
+}
+
 // @media (hover:hover){
 // 	a:hover{
 // 		color:$txt-color;

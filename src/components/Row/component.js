@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import './index.scss';
 
-import RowCards from '../RowCards/component';
+import RowCards from '../RowCards';
 
 const Row = () => {
   const [movieOrTv, setMovieOrTv] = useState('movie');

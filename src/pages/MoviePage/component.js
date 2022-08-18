@@ -18,6 +18,7 @@ const MoviePage = () => {
       setFilm(response);
     });
     api.credits(category.movie, id).then((response) => setCast(response.cast));
+    window.scrollTo(0, 0);
   }, [id]);
 
   return (

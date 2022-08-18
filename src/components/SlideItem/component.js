@@ -1,10 +1,10 @@
 import React from 'react';
+import './index.scss';
 
 import { Link } from 'react-router-dom';
 import apiConfig from '../../api/apiConfig';
 
 import Button from '../Button';
-import './index.scss';
 
 const MovieSlideItem = ({ movie, isActiveClass }) => {
   const background = apiConfig.originalImage(movie.backdrop_path);
