@@ -4,7 +4,17 @@
 	margin-top: 8rem;
 	background-color: $dark-color;
 	padding: 2rem 1rem;
+	display: flex;
+	gap: 2rem;
 
+	&__filters{
+		flex: 0 1 300px;
+	}
+
+	&__body{
+		flex: 1 1 auto;
+		background-color: $dark-color;
+	}
 }
 
 .movie-grid{
@@ -31,5 +41,8 @@
 		height: 30px;
 		cursor: pointer;
 		@include flex(center,center);
+	}
+   li.selected{
+		background-color: $btn-color-secondary;
 	}
 }

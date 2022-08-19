@@ -36,6 +36,14 @@ const api = {
     const url = `trending/${category[cate]}/${time}`;
     return axiosClient.get(url, params);
   },
+  getGenres: (cate, params) => {
+    const url = `genre/${category[cate]}/list`;
+    return axiosClient.get(url, params);
+  },
+  getDiscover: (cate, params) => {
+    const url = `discover/${category[cate]}`;
+    return axiosClient.get(url, params);
+  },
   getVideos: (cate, id) => {
     const url = `${category[cate]}/${id}/videos`;
     return axiosClient.get(url, { params: {} });

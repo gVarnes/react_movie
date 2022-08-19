@@ -3,9 +3,9 @@ import './index.scss';
 
 import PropTypes from 'prop-types';
 
-const Button = ({ btnClass, small, search, children, onClick }) => {
+const Button = ({ small, children, onClick }) => {
   return (
-    <button className={`btn ${btnClass} ${small} ${search}`} onClick={onClick}>
+    <button className={`btn ${small}`} onClick={onClick}>
       {children}
     </button>
   );
