@@ -1,7 +1,7 @@
 import React, { useState, useEffect, memo } from 'react';
 import './index.scss';
 
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/scss';
@@ -53,11 +53,12 @@ export const Card = ({
   name,
   poster_path,
 }) => {
+  const { category } = useParams();
   return (
     <div className="card">
       <div className="card__rating">{Math.round(vote_average * 10) / 10}</div>
       <div className="card__image">
-        <Link to={`/movie/${id}`}>
+        <Link to={`/${category}/${id}`}>
           <img
             src={apiConfig.w220Andh330Image(
               backdrop_path ? backdrop_path : poster_path

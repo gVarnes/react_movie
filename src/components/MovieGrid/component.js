@@ -11,14 +11,12 @@ import MovieSearch from '../MovieSearch';
 import ReactPaginate from 'react-paginate';
 import api, { sortType } from '../../api/api';
 
-//========================================================================================================================================================
 import { useSelector, useDispatch } from 'react-redux';
 import {
   setMovies,
   setTotalPages,
   setPage,
 } from '../../redux/slices/moviesSlice';
-import Pagination from '../Pagination';
 
 const MovieGrid = () => {
   const [items, setItems] = useState([]);
@@ -42,6 +40,7 @@ const MovieGrid = () => {
       });
     } else {
       const params = {
+        page,
         query: keyword,
       };
       api.search(category, { params }).then((response) => {
@@ -65,7 +64,6 @@ const MovieGrid = () => {
       };
       api.search(category, { params }).then((response) => {
         dispatch(setMovies([...movies, ...response.results]));
-        // setItems((prev) => [...prev, ...response.results]);
       });
       dispatch(setPage(page + 1));
     }

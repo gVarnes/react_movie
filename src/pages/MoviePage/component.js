@@ -2,22 +2,19 @@ import React, { useState, useEffect } from 'react';
 import './index.scss';
 import { useParams } from 'react-router-dom';
 
-import api, { category } from '../../api/api';
+import api from '../../api/api';
 import apiConfig from '../../api/apiConfig';
 
 import CastList from '../../components/CastList';
 import TrailersList from '../../components/TrailersList';
 
 const MoviePage = () => {
-  const [movie, setFilm] = useState('');
-  const [cast, setCast] = useState([]);
-  const { id } = useParams();
-
+  const [movie, setMovie] = useState('');
+  const { id, category } = useParams();
   useEffect(() => {
-    api.detail(category.movie, id, { params: {} }).then((response) => {
-      setFilm(response);
+    api.detail(category, id, { params: {} }).then((response) => {
+      setMovie(response);
     });
-    api.credits(category.movie, id).then((response) => setCast(response.cast));
     window.scrollTo(0, 0);
   }, [id]);
 
@@ -43,7 +40,7 @@ const MoviePage = () => {
           ></div>
         </div>
         <div className="movie-content__info">
-          <h1 className="movie-content__title">{movie.title}</h1>
+          <h1 className="movie-content__title">{movie.title || movie.name}</h1>
           <div className="movie-content__genres">
             {movie.genres?.map((genre, i) => (
               <span className="movie-content__genres-item" key={i}>
