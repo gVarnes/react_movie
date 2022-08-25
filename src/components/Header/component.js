@@ -3,6 +3,10 @@ import './index.scss';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
+//========================================================================================================================================================
+import { useDispatch } from 'react-redux';
+import { setFilters, refreshFilters } from '../../redux/slices/filtersSlice';
+
 const headerNav = [
   { title: 'Home', path: '/' },
   { title: 'Movies', path: '/catalog/movie' },
@@ -12,6 +16,7 @@ const headerNav = [
 const Header = () => {
   const headerRef = useRef(null);
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
 
   const active = headerNav.findIndex((item) => item.path === pathname);
 
@@ -46,6 +51,9 @@ const Header = () => {
               <li
                 key={item.title}
                 className={`${i === active ? 'active' : ''}`}
+                onClick={() => {
+                  dispatch(refreshFilters());
+                }}
               >
                 <Link to={item.path}>{item.title}</Link>
               </li>

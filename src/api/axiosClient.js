@@ -6,11 +6,10 @@ import apiConfig from './apiConfig';
 const axiosClient = axios.create({
   baseURL: apiConfig.baseUrl,
   paramsSerializer: (params) =>
-    queryString.stringify({ ...params, api_key: apiConfig.apiKey }),
-  //   onUploadProgress: (progressEvent) => {},
-  //   onDownloadProgress: (progressEvent) => {
-  //     console.log(progressEvent);
-  //   },
+    queryString.stringify(
+      { ...params, api_key: apiConfig.apiKey },
+      { arrayFormat: 'comma' }
+    ),
 });
 
 //if i have custom config i should handle intrerceptors

@@ -38,7 +38,7 @@ const RowCards = ({ sortCondition, movieOrTv = 'movie', time = 'day' }) => {
       {cards &&
         cards.map((movie, i) => (
           <SwiperSlide key={movie.id} className="row__card">
-            <Card {...movie}></Card>
+            <Card {...movie} movieOrTv={movieOrTv}></Card>
           </SwiperSlide>
         ))}
     </Swiper>
@@ -52,13 +52,15 @@ export const Card = ({
   vote_average,
   name,
   poster_path,
+  movieOrTv,
 }) => {
   const { category } = useParams();
+  //category can be undefined on main page so it shoulde use variable from cardrow component for identify
   return (
     <div className="card">
       <div className="card__rating">{Math.round(vote_average * 10) / 10}</div>
       <div className="card__image">
-        <Link to={`/${category}/${id}`}>
+        <Link to={`/${category ? category : movieOrTv}/${id}`}>
           <img
             src={apiConfig.w220Andh330Image(
               backdrop_path ? backdrop_path : poster_path
