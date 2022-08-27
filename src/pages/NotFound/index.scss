@@ -1,0 +1,10 @@
+@use './../../scss/' as *;
+
+.notfound{
+	max-width: 400px;
+	margin: 0 auto;
+	min-height: 100vh;
+	font-size: 3rem;
+
+	@include flex(center,center);
+}

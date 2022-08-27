@@ -21,8 +21,6 @@ import {
 } from '../../redux/slices/moviesSlice';
 import { setFilters } from '../../redux/slices/filtersSlice';
 
-//========================================================================================================================================================
-
 const MovieGrid = () => {
   // it is needed for checking if it is a first render or not. I set it on true if dispatch(setFilters) has done
   const isSort = useRef(false);
@@ -137,10 +135,6 @@ const MovieGrid = () => {
       dispatch(setPage(e.selected + 1));
     }
   };
-
-  useEffect(() => {
-    console.log(page);
-  }, [page]);
 
   return (
     <section className="catalog container">

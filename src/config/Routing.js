@@ -5,6 +5,7 @@ import { Routes, Route } from 'react-router-dom';
 import Home from '../pages/Home';
 import MoviePage from '../pages/MoviePage';
 import MovieGrid from '../components/MovieGrid';
+import NotFound from '../pages/NotFound/component';
 
 const Routing = () => {
   return (
@@ -16,6 +17,7 @@ const Routing = () => {
         path="/catalog/:category/search/:keyword"
         element={<MovieGrid />}
       ></Route>
+      <Route path="*" element={<NotFound />}></Route>
     </Routes>
   );
 };
