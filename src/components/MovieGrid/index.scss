@@ -3,17 +3,19 @@
 .catalog{
 	margin-top: 8rem;
 	background-color: $dark-color;
-	padding: 2rem 1rem;
+	padding: 3rem 1rem;
 	display: flex;
 	gap: 2rem;
 
-	&__filters{
-		flex: 0 1 300px;
-	}
+	&__filters{}
 
 	&__body{
 		flex: 1 1 auto;
 		background-color: $dark-color;
+	}
+
+	@include medium{
+		flex-direction: column;
 	}
 }
 

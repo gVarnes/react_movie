@@ -2,6 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   with_genres: [],
+  sort_by: {
+    name: 'Popularity Descending',
+    sortProperty: 'popularity.desc',
+  },
 };
 
 const filtersSlice = createSlice({
@@ -10,47 +14,32 @@ const filtersSlice = createSlice({
   reducers: {
     addGenres: (state, action) => {
       const genreID = action.payload;
+      //we need to check if our genres includes current genre id, we should delete it or we are adding id in array
       state.with_genres.includes(genreID)
         ? (state.with_genres = state.with_genres.filter(
             (item) => item !== genreID
           ))
         : state.with_genres.push(genreID);
     },
+    addSort: (state, action) => {
+      state.sort_by = action.payload;
+    },
     setFilters: (state, action) => {
-      // state.with_genres.push(action.payload.with_genres);
-      // state.with_genres.includes(action.payload)
-      // ? {
-      // 	 ...state,
-      // 	 with_genres: filters.with_genres.filter(
-      // 		(item) => item !== action.payload
-      // 	 ),
-      //   }
-      // : state.with_genres.push(action.payload);
-      //we need to check if our genres includes current genre id, we should delete it or we are adding id in array
-      // state.with_genres.includes(action.payload)
-      //   ? (state.with_genres = state.with_genres.filter(
-      //       (item) => item !== action.payload
-      //     ))
-      //   : state.with_genres.push(action.payload);
-
-      // console.log(
-      //   action.payload.with_genres.split(',').map((item) => Number(item))
-      // );
-      //Main problem is that action.payload is string and we have to compare this values in other reducer but there it is a number
-      //so i am mapping to write it like Number
-      console.log(action.payload.with_genres);
-
-      state.with_genres = action.payload.with_genres
-        ?.split(',')
-        .map((item) => Number(item));
+      state.with_genres = action.payload.with_genres;
+      state.sort_by = action.payload.sort_by;
     },
     //in header when link was clicked it refresh state
     refreshFilters: (state, action) => {
       state.with_genres = [];
+      state.sort_by = {
+        name: 'Popularity Descending',
+        sortProperty: 'popularity.desc',
+      };
     },
   },
 });
 
-export const { setFilters, addGenres, refreshFilters } = filtersSlice.actions;
+export const { addGenres, addSort, setFilters, refreshFilters } =
+  filtersSlice.actions;
 
 export default filtersSlice.reducer;

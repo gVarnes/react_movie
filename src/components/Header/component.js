@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom';
 
 //========================================================================================================================================================
 import { useDispatch } from 'react-redux';
-import { setFilters, refreshFilters } from '../../redux/slices/filtersSlice';
+import { refreshFilters } from '../../redux/slices/filtersSlice';
 
 const headerNav = [
   { title: 'Home', path: '/' },

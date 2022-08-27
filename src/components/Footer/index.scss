@@ -1,1 +1,73 @@
 @use './../../scss/' as *;
+
+.footer{
+	background-color: $dark-color;
+	position: relative;
+	padding: 6rem 2rem;
+	background-position: top;
+	background-size:  cover;
+	background-repeat: no-repeat;
+	position: relative;
+	
+	&::before{
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(0,0,0,0.8);
+		z-index: 2;
+	}
+}
+
+.content-footer{
+	max-width: 1000px;
+	position: relative;
+	z-index: 10;
+	&__logo{
+		@include flex(center,center);
+		margin-bottom: 3rem;
+	}
+
+	&__body{
+		display: grid;
+		grid-template-columns: repeat(3,1fr);
+
+		@include mobile{
+			grid-template-columns: repeat(2,1fr);
+		}
+	}
+
+	&__list{
+		@include flex(flex-start,flex-start);
+		flex-direction: column;
+		margin-top: 1rem;
+		font-size: 1.5rem;
+		font-weight: 600;
+		
+		& > * ~ *{
+			margin-top: 1rem;
+		}
+
+		li{
+			position: relative;
+			
+			&::after{
+				content: '';
+				position: absolute;
+				bottom: 0;
+				left: 50%;
+				transform: translateX(-50%);
+				width: 0;
+				transition: width .3s ease;
+				height: 2px;
+				background-color: $btn-color-secondary;
+			}
+	
+			&:hover::after{
+				width: 100%;
+			}
+		}
+	}
+}

@@ -2,20 +2,18 @@ import React, { useState, useEffect } from 'react';
 import './index.scss';
 import Button from '../Button';
 
-import { useForm } from 'react-hook-form';
-
 import { useParams, useNavigate } from 'react-router-dom';
 
 import { motion, AnimatePresence } from 'framer-motion';
 import api from '../../api/api';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { setMovies } from '../../redux/slices/moviesSlice';
+import { setMovies, setPage } from '../../redux/slices/moviesSlice';
 
 import queryString from 'query-string';
-import { setFilters, addGenres } from '../../redux/slices/filtersSlice';
+import { addGenres, addSort } from '../../redux/slices/filtersSlice';
 
-const sortList = [
+export const sortList = [
   {
     name: 'Popularity Ascending',
     sortProperty: 'popularity.asc',
@@ -50,13 +48,22 @@ const sortList = [
   },
 ];
 
-const Filters = ({ value }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const motionSettings = {
+  variants: {
+    open: { opacity: 1, height: 'auto' },
+    collapsed: { opacity: 0, height: 0 },
+  },
+  duration: {
+    duration: 0.8,
+    ease: [0.04, 0.62, 0.23, 0.98],
+  },
+};
+
+const Filters = () => {
+  const [isOpenSelect, setIsOpenSelect] = useState(false);
   const [genres, setGenres] = useState([]);
-  // const [filters, setFilters] = useState({
-  //   with_genres: [],
-  // });
-  const { with_genres } = useSelector((state) => state.filters);
+
+  const { with_genres, sort_by } = useSelector((state) => state.filters);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -69,14 +76,21 @@ const Filters = ({ value }) => {
       .then((response) => setGenres(response.genres));
   }, []);
 
-  const onClick = () => {
-    const params = { with_genres };
+  const onClickButton = () => {
+    const params = {
+      with_genres: with_genres,
+      sort_by: sort_by.sortProperty,
+    };
+    dispatch(setPage(1));
     api.getDiscover(category, { params }).then((response) => {
       dispatch(setMovies(response.results));
     });
 
     const queryURL = queryString.stringify(
-      { with_genres },
+      {
+        with_genres,
+        sort_by: sort_by.sortProperty,
+      },
       { arrayFormat: 'comma' }
     );
     navigate(`?${queryURL}`);
@@ -88,187 +102,100 @@ const Filters = ({ value }) => {
     e.target.classList.toggle('active');
   };
 
+  const sortAction = (obj) => {
+    dispatch(addSort(obj));
+  };
+
   return (
-    <div className="filters-form">
-      <div className={`filters-form__panel panel mb-2`}>
-        <motion.h5
-          className="panel__title"
-          initial={false}
-          onClick={() => setIsOpen((prev) => !prev)}
+    <div className="filters">
+      <FilterPanel title="Sort">
+        <motion.div
+          className="dropdown"
+          key="content"
+          initial="collapsed"
+          animate="open"
+          exit="collapsed"
+          variants={motionSettings.variants}
+          transition={motionSettings.duration}
         >
-          Sort
-        </motion.h5>
-        <AnimatePresence initial={false}>
-          {isOpen && (
-            <motion.div
-              key="content"
-              initial="collapsed"
-              animate="open"
-              exit="collapsed"
-              className="panel__body"
-              variants={{
-                open: { opacity: 1, height: 'auto' },
-                collapsed: { opacity: 0, height: 0 },
-              }}
-              transition={{ duration: 0.8, ease: [0.04, 0.62, 0.23, 0.98] }}
-            >
-              {sortList?.map((sort) => (
-                <div
-                  key={sort.sortProperty}
-                  className={`panel__label`}
-                  // onClick={(e) => addGenre(e, genre)}
-                >
-                  <div className={`panel__input`} />
-                  {sort.name}
-                </div>
-              ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-      ==================
-      {/* <div className={`filters-form__panel panel mb-2`}>
-        <motion.h5
-          className="panel__title"
-          initial={false}
-          onClick={() => setIsOpen((prev) => !prev)}
+          <div className="dropdown__title">Sort Results By</div>
+          <motion.div
+            className="dropdown__btn"
+            initial={false}
+            onClick={() => setIsOpenSelect((prev) => !prev)}
+          >
+            {sort_by.name}
+          </motion.div>
+          <AnimatePresence>
+            {isOpenSelect && (
+              <motion.div
+                className="dropdown__content"
+                key="content"
+                initial="collapsed"
+                animate="open"
+                exit="collapsed"
+                variants={motionSettings.variants}
+                transition={motionSettings.duration}
+              >
+                {sortList.map((obj) => (
+                  <div
+                    className={`dropdown__item ${
+                      obj.name === sort_by.name ? 'active' : ''
+                    }`}
+                    key={obj.sortProperty}
+                    onClick={() => sortAction(obj)}
+                  >
+                    {obj.name}
+                  </div>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+      </FilterPanel>
+      <FilterPanel title="Filters">
+        <motion.div
+          className="genres"
+          key="content"
+          initial="collapsed"
+          animate="open"
+          exit="collapsed"
+          variants={motionSettings.variants}
+          transition={motionSettings.duration}
         >
-          Filters
-        </motion.h5>
-        <AnimatePresence initial={false}>
-          {isOpen && (
-            <motion.div
-              key="content"
-              initial="collapsed"
-              animate="open"
-              exit="collapsed"
-              className="panel__body"
-              variants={{
-                open: { opacity: 1, height: 'auto' },
-                collapsed: { opacity: 0, height: 0 },
-              }}
-              transition={{ duration: 0.8, ease: [0.04, 0.62, 0.23, 0.98] }}
+          {genres?.map((genre) => (
+            <div
+              key={genre.id}
+              className={`genres__label ${
+                with_genres?.includes(genre.id) ? 'active' : ''
+              }`}
+              onClick={(e) => addGenre(e, genre)}
             >
-              {genres?.map((genre) => (
-                <div
-                  key={genre.id}
-                  className={`panel__label`}
-                  onClick={(e) => addGenre(e, genre)}
-                >
-                  <div className={`panel__input`} />
-                  {genre.name}
-                </div>
-              ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div> */}
-      <Button onClick={onClick}>Submit</Button>
+              {genre.name}
+            </div>
+          ))}
+        </motion.div>
+      </FilterPanel>
+      <Button onClick={onClickButton}>Submit</Button>
     </div>
   );
 };
 
-//========================================================================================================================================================
+const FilterPanel = ({ title, children }) => {
+  const [isOpen, setIsOpen] = useState(false);
 
-// const Filters = () => {
-//   const [isOpen, setIsOpen] = useState(false);
-//   const [genres, setGenres] = useState([]);
-//   const {
-//     register,
-//     handleSubmit,
-//     watch,
-//     formState: { errors },
-//     getValues,
-//   } = useForm();
-
-//   const dispatch = useDispatch();
-//   const navigate = useNavigate();
-
-//   const { category } = useParams();
-
-//   useEffect(() => {
-//     api
-//       .getGenres(category, { params: {} })
-//       .then((response) => setGenres(response.genres));
-//   }, []);
-
-//   //========================================================================================================================================================
-
-//   useEffect(() => {
-//     if (window.location.search) {
-//       const queryURL = queryString.parse(window.location.search.substring(1));
-//       console.log(queryURL);
-//     }
-//   }, []);
-
-//   //========================================================================================================================================================
-
-//   const onSubmit = (data) => {
-//     const params = {};
-//     Object.entries(data).forEach((item) => {
-//       params[item[0]] = item[1].join(',');
-//     });
-
-//     api.getDiscover(category, { params }).then((response) => {
-//       dispatch(setMovies(response.results));
-//     });
-//   };
-
-//   //getting all values and look after some keys that we change
-//   const values = getValues();
-//   useEffect(() => {
-//     const queryURL = queryString.stringify(values, { arrayFormat: 'comma' });
-//     navigate(`?${queryURL}`), { replace: true };
-//   }, [values['with_genres']]);
-
-//   return (
-//     <form onSubmit={handleSubmit(onSubmit)} className="filters-form">
-//       <div className={`filters-form__panel panel mb-2`}>
-//         <motion.h5
-//           className="panel__title"
-//           initial={false}
-//           onClick={() => setIsOpen((prev) => !prev)}
-//         >
-//           Filters
-//         </motion.h5>
-//         <AnimatePresence initial={false}>
-//           {isOpen && (
-//             <motion.div
-//               key="content"
-//               initial="collapsed"
-//               animate="open"
-//               exit="collapsed"
-//               className="panel__body"
-//               variants={{
-//                 open: { opacity: 1, height: 'auto' },
-//                 collapsed: { opacity: 0, height: 0 },
-//               }}
-//               transition={{ duration: 0.8, ease: [0.04, 0.62, 0.23, 0.98] }}
-//             >
-//               {genres?.map((genre) => (
-//                 <label
-//                   key={genre.id}
-//                   className={`panel__label`}
-//                   onClick={(e) => {
-//                     e.target.classList.toggle('active');
-//                   }}
-//                 >
-//                   <input
-//                     {...register('with_genres')}
-//                     type="checkbox"
-//                     value={genre.id}
-//                     className="panel__input"
-//                   />
-//                   {genre.name}
-//                 </label>
-//               ))}
-//             </motion.div>
-//           )}
-//         </AnimatePresence>
-//       </div>
-//       <Button>Submit</Button>
-//     </form>
-//   );
-// };
+  return (
+    <div className={`filters__panel panel mb-2`}>
+      <motion.h5
+        className="panel__title"
+        initial={false}
+        onClick={() => setIsOpen((prev) => !prev)}
+      >
+        {title}
+      </motion.h5>
+      <AnimatePresence initial={false}>{isOpen && children}</AnimatePresence>
+    </div>
+  );
+};
 
 export default Filters;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, memo } from 'react';
 import './index.scss';
+import undefinedImage from './undefined_image.png';
 
 import { Link, useParams } from 'react-router-dom';
 
@@ -27,12 +28,13 @@ const RowCards = ({ sortCondition, movieOrTv = 'movie', time = 'day' }) => {
     <Swiper
       grabCursor={true}
       spaceBetween={10}
-      slidesPerView={1}
       breakpoints={{
         0: { slidesPerView: 2 },
-        600: { slidesPerView: 4 },
-        900: { slidesPerView: 5.5 },
-        1024: { slidesPerView: 6.5 },
+        600: { slidesPerView: 3 },
+        768: { slidesPerView: 4 },
+        900: { slidesPerView: 5 },
+        1024: { slidesPerView: 5.5 },
+        1100: { slidesPerView: 6.5 },
       }}
     >
       {cards &&
@@ -55,6 +57,7 @@ export const Card = ({
   movieOrTv,
 }) => {
   const { category } = useParams();
+  const imagePath = backdrop_path ? backdrop_path : poster_path;
   //category can be undefined on main page so it shoulde use variable from cardrow component for identify
   return (
     <div className="card">
@@ -62,10 +65,8 @@ export const Card = ({
       <div className="card__image">
         <Link to={`/${category ? category : movieOrTv}/${id}`}>
           <img
-            src={apiConfig.w220Andh330Image(
-              backdrop_path ? backdrop_path : poster_path
-            )}
-            alt=""
+            src={imagePath ? apiConfig.w500Image(imagePath) : undefinedImage}
+            alt={title}
           />
         </Link>
       </div>
