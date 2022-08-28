@@ -47,13 +47,16 @@ const MovieReviews = () => {
       </div>
       <Swiper
         grabCursor={true}
-        spaceBetween={10}
         slidesPerView={1}
         autoHeight={true}
         pagination={{
           dynamicBullets: true,
         }}
         modules={[Pagination]}
+        breakpoints={{
+          0: { spaceBetween: 0 },
+          600: { spaceBetween: 10 },
+        }}
       >
         {reviews?.map((review) => {
           const date = new Date(Date.parse(review.created_at));
