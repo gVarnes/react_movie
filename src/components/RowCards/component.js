@@ -55,6 +55,7 @@ export const Card = ({
   name,
   poster_path,
   movieOrTv,
+  recClass,
 }) => {
   const { category } = useParams();
   const imagePath = backdrop_path ? backdrop_path : poster_path;
@@ -62,7 +63,7 @@ export const Card = ({
   return (
     <div className="card">
       <div className="card__rating">{Math.round(vote_average * 10) / 10}</div>
-      <div className="card__image">
+      <div className={`card__image ${recClass}`}>
         <Link to={`/${category ? category : movieOrTv}/${id}`}>
           <img
             src={imagePath ? apiConfig.w500Image(imagePath) : undefinedImage}

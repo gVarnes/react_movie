@@ -7,10 +7,13 @@ import apiConfig from '../../api/apiConfig';
 
 import CastList from '../../components/CastList';
 import TrailersList from '../../components/TrailersList';
+import Recommendations from '../../components/Recommendations';
+import MovieReviews from '../../components/MovieReviews/component';
 
 const MoviePage = () => {
   const [movie, setMovie] = useState('');
   const { id, category } = useParams();
+
   useEffect(() => {
     api.detail(category, id, { params: {} }).then((response) => {
       setMovie(response);
@@ -50,9 +53,16 @@ const MoviePage = () => {
           </div>
           <div className="movie-content__overview">{movie.overview}</div>
         </div>
-        <div className="movie-content__cast cast-content">
+        <div className="movie-content__cast cast-content mb-2">
           <h2 className="cast-content__title">Casts</h2>
           <CastList></CastList>
+        </div>
+        <div className="movie-content__reviews reviews-content mb-2">
+          <MovieReviews></MovieReviews>
+        </div>
+        <div className="movie-content__recommendations recommendations-content mb-2">
+          <h2 className="recommendations-content__title">Recommendations</h2>
+          <Recommendations></Recommendations>
         </div>
       </div>
       <TrailersList></TrailersList>

@@ -41,8 +41,13 @@
 		@include medium{
 			height: 250px;
 		}
-		@include medium{
+		@include mobile{
 			height: 280px;
+		}
+		&_rec{
+			@include tablet{
+				height: 250px;
+			}
 		}
 	}
 }

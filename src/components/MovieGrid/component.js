@@ -60,6 +60,7 @@ const MovieGrid = () => {
 
   useEffect(() => {
     // its an audit that if was the first render?
+    window.scrollTo(0, 0);
     if (!isSort.current) {
       if (keyword === undefined) {
         const params = {

@@ -30,7 +30,7 @@ const CastList = () => {
           <SwiperSlide key={i} className="cast-content__slide">
             <h5 className="cast-content__name">{actor.name}</h5>
             <img
-              className="cast-content__image"
+              className={`cast-content__image`}
               src={
                 actor.profile_path
                   ? `${apiConfig.w500Image(actor.profile_path)}`

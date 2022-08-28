@@ -14,20 +14,7 @@ export const sortType = {
   on_the_air: 'on_the_air',
 };
 
-// export const tvType = {
-//   popular: 'popular',
-//   topRated: 'top_rated',
-// };
-
 const api = {
-  //   getMoviesList: (type, params) => {
-  //     const url = `movie/${sortType[type]}`;
-  //     return axiosClient.get(url, params);
-  //   },
-  //   getTvList: (type, params) => {
-  //     const url = `tv/${sortType[type]}`;
-  //     return axiosClient.get(url, params);
-  //   },
   getList: (cate, type, params) => {
     const url = `${category[cate]}/${sortType[type]}`;
     return axiosClient.get(url, params);
@@ -46,6 +33,14 @@ const api = {
   },
   getVideos: (cate, id) => {
     const url = `${category[cate]}/${id}/videos`;
+    return axiosClient.get(url, { params: {} });
+  },
+  getRecommendations: (cate, id) => {
+    const url = `/${category[cate]}/${id}/recommendations`;
+    return axiosClient.get(url, { params: {} });
+  },
+  getReviews: (cate, id) => {
+    const url = `/${category[cate]}/${id}/reviews`;
     return axiosClient.get(url, { params: {} });
   },
   search: (cate, params) => {

@@ -1,0 +1,18 @@
+@use './../../scss/' as *;
+
+.recommendations-content__list{
+	// @include flex(flex-start,center);
+	display: grid;
+	grid-template-columns: repeat(6,1fr);
+	gap: 10px;
+
+	@include medium{
+		// flex-wrap: wrap;
+		grid-template-columns: repeat(4,1fr);
+	}
+
+	@include mobile{
+		// flex-wrap: wrap;
+		grid-template-columns: repeat(2 ,1fr);
+	}
+}
