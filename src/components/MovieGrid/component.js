@@ -47,7 +47,7 @@ const MovieGrid = () => {
         setFilters({
           ...queryURL,
           // I am checking if queryURL has this parametr so i change it to array and each element to Number, if has not
-          // i set in redux pure array
+          // I set in redux pure array
           with_genres: queryURL.with_genres
             ? queryURL.with_genres.split(',').map((item) => Number(item))
             : [],
@@ -60,7 +60,6 @@ const MovieGrid = () => {
 
   useEffect(() => {
     // its an audit that if was the first render?
-    window.scrollTo(0, 0);
     if (!isSort.current) {
       if (keyword === undefined) {
         const params = {
@@ -88,6 +87,7 @@ const MovieGrid = () => {
         });
       }
     }
+    window.scrollTo(0, 0);
     isSort.current = false;
   }, [category, keyword, with_genres]);
 
@@ -112,6 +112,7 @@ const MovieGrid = () => {
       });
       dispatch(setPage(page + 1));
     }
+    window.scrollTo(0, 0);
   };
 
   const handlePageClick = (e) => {
@@ -135,6 +136,7 @@ const MovieGrid = () => {
       });
       dispatch(setPage(e.selected + 1));
     }
+    window.scrollTo(0, 0);
   };
 
   return (

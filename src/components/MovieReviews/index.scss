@@ -34,6 +34,7 @@
 	border-radius: 8px;
 	box-shadow: 0 0 6px $btn-color-main;
 	padding: 20px;
+	min-height: 200px;
 	&__author{
 		display: grid;
 		grid-template-columns: 1fr 2fr 3fr;
